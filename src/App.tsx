@@ -1,7 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
-import { Button } from "./components/ui/button";
+import { decrement, increment } from "./redux/features/counter/counterSlice";
 
 function App() {
+  const despatch = useDispatch();
+
+  const { count } = useSelector((state) => state.counter);
+
+  const hendleIncrement = () => {
+    despatch(increment());
+  };
+  const hendleDecrement = () => {
+    despatch(decrement());
+  };
   return (
     <>
       <div className="title p-6">
@@ -9,8 +20,10 @@ function App() {
           demo project for frontend project
         </h1>
       </div>
-      <div className=" bg-amber-300 w-fit mx-auto ">
-        <Button>add me</Button>
+      <div className=" w-fit mx-auto text-4xl cursor-pointer">
+        <button onClick={hendleIncrement}>+</button>
+        <div className="m-4 text-4xl font-bold">{count}</div>
+        <button onClick={hendleDecrement}>-</button>
       </div>
     </>
   );
